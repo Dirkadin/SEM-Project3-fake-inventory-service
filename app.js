@@ -29,9 +29,13 @@ var inventory = new Map([
     ['cookie', 3]
 ]);
 
-app.post('/setcount/:item', function (req, res) {
-  console.log(req.params.item);
-  console.log(inventory.get(req.params.item));
+app.post('/setcount/:item/:quantity', function (req, res) {
+  var item = req.params.item;
+  var quantity = req.params.quantity;
+
+  inventory.set(item, quantity);
+
+  res.sendStatus(200);
 });
 
 // catch 404 and forward to error handler
