@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var getCountRouter = require('./routes/getCount');
 
 var app = express();
 
@@ -20,7 +20,19 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/getCount', getCountRouter);
+
+var inventory = new Map([
+    ['hotdog', 0],
+    ['hamburger', 1],
+    ['soda', 2],
+    ['cookie', 3]
+]);
+
+app.post('/setcount/:item', function (req, res) {
+  console.log(req.params.item);
+  console.log(inventory.get(req.params.item));
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -39,3 +51,8 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+
+exports.app = {
+  inventory
+};
+
