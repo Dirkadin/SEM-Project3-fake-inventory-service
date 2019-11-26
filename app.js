@@ -20,7 +20,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/getCount', getCountRouter);
+app.use('/getcount', getCountRouter);
 
 var inventory = new Map([
     ['hotdog', 0],
