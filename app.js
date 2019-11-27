@@ -35,6 +35,8 @@ app.post('/setcount/:item/:quantity', function (req, res) {
 
   inventory.set(item, quantity);
 
+  console.log('Item: ' + item + ' has been set to ' + quantity);
+
   res.sendStatus(200);
 });
 
